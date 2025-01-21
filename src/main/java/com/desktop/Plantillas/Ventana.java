@@ -11,4 +11,8 @@ public class Ventana extends JFrame {
     setLocationRelativeTo(null);
 
   }
+
+  public void cerrar() {
+    this.dispose();
+  }
 }
