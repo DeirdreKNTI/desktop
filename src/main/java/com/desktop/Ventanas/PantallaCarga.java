@@ -1,8 +1,11 @@
 package com.desktop.Ventanas;
 
-import com.desktop.Plantillas.*;
+import com.desktop.Plantillas.Ventana;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.BorderLayout;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,9 +17,9 @@ public class PantallaCarga extends Ventana {
   public PantallaCarga() {
     super("Por favor espere");
     msg = new JLabel("Cargando");
-    msg.setBounds(165, 100, 80, 20);
-    add(msg);
-
+    msg.setHorizontalAlignment(JLabel.CENTER);
+    zCentral.setLayout(new BorderLayout());
+    this.zCentral.add(msg, SwingConstants.CENTER);
     this.setVisible(true);
 
     LoadAnimation();

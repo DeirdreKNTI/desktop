@@ -1,9 +1,11 @@
 package com.desktop.Ventanas;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import com.desktop.Plantillas.Ventana;
 
 public class PantallaInicio extends Ventana {
@@ -12,23 +14,26 @@ public class PantallaInicio extends Ventana {
   JPasswordField psw;
   JLabel userL;
   JLabel pswL;
+  JPanel zForm;
 
   public PantallaInicio() {
     super("Ingreso");
 
+    zForm = new JPanel();
     userL = new JLabel("Usuario");
-    userL.setBounds(70, 80, 80, 20);
     pswL = new JLabel("Contraseña");
-    pswL.setBounds(70, 110, 80, 20);
     user = new JTextField("");
-    user.setBounds(150, 80, 80, 20);
+    user.setColumns(10);
     psw = new JPasswordField("");
-    psw.setBounds(150, 110, 80, 20);
-
-    add(user);
-    add(psw);
-    add(pswL);
-    add(userL);
+    psw.setColumns(10);
+    zCentral.setLayout(new FlowLayout(FlowLayout.CENTER));
+    zForm.setPreferredSize(new Dimension(120, 250));
+    zForm.setLayout(new FlowLayout());
+    zForm.add(userL);
+    zForm.add(user);
+    zForm.add(pswL);
+    zForm.add(psw);
+    zCentral.add(zForm);
     this.setVisible(true);
   }
 }
