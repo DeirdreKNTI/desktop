@@ -3,7 +3,6 @@ package com.desktop.Ventanas;
 import com.desktop.Plantillas.*;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +13,8 @@ public class PantallaCarga extends Ventana {
 
   public PantallaCarga() {
     super("Por favor espere");
-    msg = new JLabel("Cargando", SwingConstants.CENTER);
+    msg = new JLabel("Cargando");
+    msg.setBounds(165, 100, 80, 20);
     add(msg);
 
     this.setVisible(true);
