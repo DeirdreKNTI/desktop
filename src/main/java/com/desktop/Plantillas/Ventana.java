@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class Ventana extends JFrame {
 
-  public JPanel zNorte, zEste, zOeste, zCentral, zSur;
+  public JPanel zNorte, zEste, zOeste, zCentral, zSur, zForm;
 
   public Ventana(String titulo) {
     setTitle(titulo);
@@ -22,6 +22,7 @@ public class Ventana extends JFrame {
     zOeste = new JPanel();
     zEste = new JPanel();
     zSur = new JPanel();
+    zForm = new JPanel();
 
     zCentral.setPreferredSize(new Dimension(100, 40));
     zCentral.setBackground(Color.red);
