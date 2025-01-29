@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.Arrays;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -43,7 +44,15 @@ public class PantallaInicio extends Ventana {
     zForm.add(psw);
     zForm.add(logIn);
     zCentral.add(zForm);
-
     this.setVisible(true);
+  }
+
+  private void checkLogin(){
+    String u = user.getText();
+    char[] p = psw.getPassword();
+    char[] password = {'1','9','8','7'};
+    if (u.equals("Carlos") && Arrays.equals(p, password))  {
+      
+    }
   }
 }
