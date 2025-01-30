@@ -1,19 +1,14 @@
-package com.desktop.Ventanas;
+package Ventanas;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.util.Arrays;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import com.desktop.Plantillas.Ventana;
+import Plantillas.Ventana;
 
 public class PantallaInicio extends Ventana {
 

@@ -1,6 +1,6 @@
-package com.desktop.Ventanas;
+package Ventanas;
 
-import com.desktop.Plantillas.Ventana;
+import Plantillas.Ventana;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
