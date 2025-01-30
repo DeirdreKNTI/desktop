@@ -25,15 +25,15 @@ public class Ventana extends JFrame {
     zForm = new JPanel();
 
     zCentral.setPreferredSize(new Dimension(100, 40));
-    zCentral.setBackground(Color.red);
+    // zCentral.setBackground(Color.red);
     zNorte.setPreferredSize(new Dimension(100, 40));
-    zNorte.setBackground(Color.green);
+    // zNorte.setBackground(Color.green);
     zOeste.setPreferredSize(new Dimension(100, 40));
-    zOeste.setBackground(Color.blue);
+    // zOeste.setBackground(Color.blue);
     zEste.setPreferredSize(new Dimension(100, 40));
-    zEste.setBackground(Color.yellow);
+    // zEste.setBackground(Color.yellow);
     zSur.setPreferredSize(new Dimension(100, 40));
-    zSur.setBackground(Color.magenta);
+    // zSur.setBackground(Color.darkGray);
 
     add(zCentral, BorderLayout.CENTER);
     add(zNorte, BorderLayout.NORTH);
