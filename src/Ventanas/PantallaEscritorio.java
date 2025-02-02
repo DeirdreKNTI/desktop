@@ -4,7 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import Aplicaciones.Calculadora;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 import Plantillas.Ventana;
 
@@ -24,6 +31,15 @@ public class PantallaEscritorio extends Ventana {
     ico2.setBackground(Color.lightGray);
     ico3 = new JPanel();
     ico3.setPreferredSize(iconD);
+
+    ico2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Acción a realizar al hacer clic
+                new Calculadora();
+            }
+        });
+
 
     zSur.setBackground(Color.darkGray);
 
