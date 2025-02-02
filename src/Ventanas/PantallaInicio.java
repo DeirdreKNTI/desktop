@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,7 +27,7 @@ public class PantallaInicio extends Ventana {
 
   public PantallaInicio() {
     super("Ingreso");
-
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     zForm = new JPanel();
     userL = new JLabel("Usuario");
     pswL = new JLabel("Contraseña");

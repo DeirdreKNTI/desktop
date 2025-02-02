@@ -8,10 +8,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Aplicaciones.Calculadora;
+import Aplicaciones.Snake;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 
 import Plantillas.Ventana;
 
@@ -22,6 +22,7 @@ public class PantallaEscritorio extends Ventana {
   public PantallaEscritorio() {
     super("Escritorio");
     setExtendedState(JFrame.MAXIMIZED_BOTH);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     ico1 = new JPanel();
     ico1.setBackground(Color.BLACK);
@@ -33,14 +34,20 @@ public class PantallaEscritorio extends Ventana {
     ico3.setPreferredSize(iconD);
 
     ico2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // Acción a realizar al hacer clic
-                new Calculadora();
-            }
-        });
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        // Acción a realizar al hacer clic
+        new Calculadora();
+      }
+    });
 
-
+    ico3.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        // Acción a realizar al hacer clic
+        new Snake();
+      }
+    });
     zSur.setBackground(Color.darkGray);
 
     zSur.setLayout(new FlowLayout(FlowLayout.LEADING));

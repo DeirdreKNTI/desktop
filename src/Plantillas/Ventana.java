@@ -13,7 +13,7 @@ public class Ventana extends JFrame {
   public Ventana(String titulo) {
     setTitle(titulo);
     setSize(400, 350);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setLocationRelativeTo(null);
     setLayout(new BorderLayout());
 
