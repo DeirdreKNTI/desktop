@@ -16,49 +16,42 @@ public class Editor extends Ventana implements ActionListener {
     private JMenu fileMenu;
     private JMenuItem newMenuItem, openMenuItem, saveMenuItem, exitMenuItem;
 
-    public Editor() {
+    public Editor(JFrame Parent) {
         // Configuración de la ventana
         super("Editor de Texto Simple");
         setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         // Crear el área de texto
         textArea = new JTextArea();
         scrollPane = new JScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Crear la barra de menú
         menuBar = new JMenuBar();
 
-        // Crear el menú "Archivo"
         fileMenu = new JMenu("Archivo");
 
-        // Crear los elementos del menú
         newMenuItem = new JMenuItem("Nuevo");
         openMenuItem = new JMenuItem("Abrir");
         saveMenuItem = new JMenuItem("Guardar");
         exitMenuItem = new JMenuItem("Salir");
 
-        // Añadir los listeners a los elementos del menú
         newMenuItem.addActionListener(this);
         openMenuItem.addActionListener(this);
         saveMenuItem.addActionListener(this);
         exitMenuItem.addActionListener(this);
 
-        // Añadir los elementos al menú "Archivo"
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
 
-        // Añadir el menú "Archivo" a la barra de menú
         menuBar.add(fileMenu);
 
-        // Añadir la barra de menú a la ventana
         setJMenuBar(menuBar);
 
-        // Hacer visible la ventana
         setVisible(true);
     }
 
@@ -93,7 +86,7 @@ public class Editor extends Ventana implements ActionListener {
             }
         } else if (e.getSource() == exitMenuItem) {
             // Salir de la aplicación
-            System.exit(0);
+            dispose();
         }
     }
 }

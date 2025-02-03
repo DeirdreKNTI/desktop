@@ -22,12 +22,12 @@ public class Calculadora extends Ventana implements ActionListener {
     private double num1 = 0, num2 = 0, resultado = 0;
     private char operacion;
 
-    public Calculadora() {
+    public Calculadora(JFrame Parent) {
         super("Calculadora");
         setSize(300, 400);
         setLayout(new BorderLayout());
+        setAlwaysOnTop(true);
 
-        // Establecer un icono para la ventana
 
         pantalla = new JTextField();
         pantalla.setEditable(false);

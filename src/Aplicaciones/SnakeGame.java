@@ -23,7 +23,7 @@ public class SnakeGame extends Ventana implements KeyListener, ActionListener {
     private JLabel titleLabel, scoreLabel;
     private int score = 0;
 
-    public SnakeGame() {
+    public SnakeGame(JFrame Parent) {
         super("Snake Game");
         snake = new ArrayList<>();
         setSize(WIDTH, HEIGHT);
@@ -33,6 +33,7 @@ public class SnakeGame extends Ventana implements KeyListener, ActionListener {
         setLayout(new BorderLayout());
         addKeyListener(this);
         setFocusable(true);
+        setAlwaysOnTop(true);
 
         createMenu();
         createGamePanel();
@@ -281,7 +282,7 @@ public class SnakeGame extends Ventana implements KeyListener, ActionListener {
         if (e.getSource() == startButton) {
             startGame();
         } else if (e.getSource() == exitButton) {
-            System.exit(0);
+            dispose();
         }
     }
 }

@@ -13,11 +13,12 @@ public class FileExplorer extends Ventana {
     private JTree tree;
     private DefaultTreeModel treeModel;
 
-    public FileExplorer() {
+    public FileExplorer(JFrame Parent) {
         super("Explorador de Archivos");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
 
         // Crear el árbol de archivos
         treeModel = new DefaultTreeModel(new DefaultMutableTreeNode());

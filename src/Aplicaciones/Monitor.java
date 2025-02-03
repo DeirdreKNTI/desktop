@@ -17,12 +17,13 @@ public class Monitor extends Ventana {
     private JLabel diskLabel;
     private Timer timer;
 
-    public Monitor() {
+    public Monitor(JFrame Parent) {
         super("Monitor de Recursos");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        setAlwaysOnTop(true);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
