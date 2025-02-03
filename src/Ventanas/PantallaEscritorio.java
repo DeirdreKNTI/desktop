@@ -19,7 +19,7 @@ import Plantillas.Ventana;
 
 public class PantallaEscritorio extends Ventana {
   JPanel ico1, ico2, ico3, ico4, ico5;
-  Dimension iconD = new Dimension(50, 50); // Tamaño de los iconos
+  Dimension iconD = new Dimension(35, 35);
   JLabel clockLabel;
   JButton calendarButton, wallpaperButton;
   JPanel contentPanel, wallpaperPanel;
