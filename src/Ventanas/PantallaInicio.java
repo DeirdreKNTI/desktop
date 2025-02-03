@@ -70,7 +70,7 @@ public class PantallaInicio extends Ventana {
     char[] password = { '1', '9', '8', '7' };
     if (u.equals(user) && Arrays.equals(p, password)) {
       dispose();
-      new PantallaEscritorio();
+      new PantallaEscritorio().setVisible(true);
       System.out.println("LogIn");
     } else {
       JOptionPane.showMessageDialog(this, "Inicio de sesión fallido", "Introduzca los datos correctos",
