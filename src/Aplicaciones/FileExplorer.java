@@ -1,10 +1,9 @@
 package Aplicaciones;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-
 import Plantillas.Ventana;
-
 import java.awt.*;
 import java.io.File;
 
@@ -66,4 +65,3 @@ public class FileExplorer extends Ventana {
         }
     }
 }
-

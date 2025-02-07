@@ -8,13 +8,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.io.File;
 import javax.imageio.ImageIO;
+import java.lang.management.ManagementFactory;
+import com.sun.management.OperatingSystemMXBean;
+import java.util.ArrayList;
+import java.util.List;
 
 import Aplicaciones.Calculadora;
 import Aplicaciones.Editor;
 import Aplicaciones.FileExplorer;
-import Aplicaciones.Monitor;
 import Aplicaciones.SnakeGame;
-
+import Aplicaciones.TaskManager;
 import Plantillas.Ventana;
 
 public class PantallaEscritorio extends Ventana {
@@ -26,14 +29,20 @@ public class PantallaEscritorio extends Ventana {
   Image backgroundImage;
   JComboBox<String> wallpaperComboBox;
   JButton applyWallpaperButton;
+  
+  private List<JFrame> openWindows;
+  private Thread resourceMonitorThread;
+  private volatile boolean isMonitoring;
 
   public PantallaEscritorio() {
     super("Escritorio");
     setExtendedState(JFrame.MAXIMIZED_BOTH);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    openWindows = new ArrayList<>();
     initComponents();
     layoutComponents();
+    startResourceMonitoring();
 
     setVisible(true);
   }
@@ -69,7 +78,7 @@ public class PantallaEscritorio extends Ventana {
     leftPanel.add(ico2);
     leftPanel.add(ico3);
     leftPanel.add(ico4);
-    leftPanel.add(ico5); // Agregar el quinto icono
+    leftPanel.add(ico5);
 
     JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
     rightPanel.setOpaque(false);
@@ -102,34 +111,34 @@ public class PantallaEscritorio extends Ventana {
   }
 
   private void setupIcons() {
-    ico1 = createIcon("assets\\snake.png", new MouseAdapter() {
+    ico1 = createIcon("assets/snake.png", new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new SnakeGame(PantallaEscritorio.this).setVisible(true);
+        openApplication(new SnakeGame(PantallaEscritorio.this));
       }
     });
-    ico2 = createIcon("assets\\calc.png", new MouseAdapter() {
+    ico2 = createIcon("assets/calc.png", new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new Calculadora(PantallaEscritorio.this).setVisible(true);
+        openApplication(new Calculadora(PantallaEscritorio.this));
       }
     });
-    ico3 = createIcon("assets\\folder.png", new MouseAdapter() {
+    ico3 = createIcon("assets/folder.png", new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new FileExplorer(PantallaEscritorio.this).setVisible(true);
+        openApplication(new FileExplorer(PantallaEscritorio.this));
       }
     });
-    ico4 = createIcon("assets\\monitor.png", new MouseAdapter() {
+    ico4 = createIcon("assets/monitor.png", new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new Monitor(PantallaEscritorio.this).setVisible(true);
+        SwingUtilities.invokeLater(() -> openApplication(new TaskManager(PantallaEscritorio.this)));
       }
     });
-    ico5 = createIcon("assets\\text.png", new MouseAdapter() {
+    ico5 = createIcon("assets/text.png", new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new Editor(PantallaEscritorio.this).setVisible(true);
+        openApplication(new Editor(PantallaEscritorio.this));
       }
     });
   }
@@ -141,17 +150,10 @@ public class PantallaEscritorio extends Ventana {
     icon.setLayout(new BorderLayout());
 
     if (imagePath != null) {
-      // Cargar la imagen original
       ImageIcon originalIcon = new ImageIcon(imagePath);
       Image originalImage = originalIcon.getImage();
-
-      // Redimensionar la imagen al tamaño deseado (iconD.width y iconD.height)
       Image resizedImage = originalImage.getScaledInstance(iconD.width, iconD.height, Image.SCALE_SMOOTH);
-
-      // Crear un ImageIcon con la imagen redimensionada
       ImageIcon resizedIcon = new ImageIcon(resizedImage);
-
-      // Asignar el ImageIcon al JLabel
       JLabel iconLabel = new JLabel(resizedIcon);
       icon.add(iconLabel, BorderLayout.CENTER);
     }
@@ -331,5 +333,59 @@ public class PantallaEscritorio extends Ventana {
       }
     }
     contentPanel.repaint();
+  }
+
+  private void openApplication(JFrame app) {
+    app.setVisible(true);
+    openWindows.add(app);
+  }
+
+  private void startResourceMonitoring() {
+    isMonitoring = true;
+    resourceMonitorThread = new Thread(() -> {
+      OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
+      while (isMonitoring) {
+        double cpuLoad = osBean.getSystemCpuLoad() * 100;
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        double memoryUsage = ((double) (totalMemory - freeMemory) / totalMemory) * 100;
+
+        if (cpuLoad > 80 || memoryUsage > 80) {
+          SwingUtilities.invokeLater(this::handleResourceOverflow);
+        }
+
+        try {
+          Thread.sleep(5000); // Verificar cada 5 segundos
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+          break;
+        }
+      }
+    });
+    resourceMonitorThread.start();
+  }
+
+  private void handleResourceOverflow() {
+    if (!openWindows.isEmpty()) {
+      JFrame oldestWindow = openWindows.remove(0);
+      oldestWindow.dispose();
+      System.gc(); // Sugerir al recolector de basura que se ejecute
+      JOptionPane.showMessageDialog(this,
+          "Se ha cerrado una aplicación debido a la escasez de recursos del sistema.",
+          "Aviso de Desbordamiento",
+          JOptionPane.WARNING_MESSAGE);
+    }
+  }
+
+  @Override
+  public void dispose() {
+    isMonitoring = false;
+    if (resourceMonitorThread != null) {
+      resourceMonitorThread.interrupt();
+    }
+    for (JFrame window : openWindows) {
+      window.dispose();
+    }
+    super.dispose();
   }
 }
