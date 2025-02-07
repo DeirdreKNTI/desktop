@@ -20,7 +20,7 @@ public class TaskManager extends Ventana {
     public TaskManager(JFrame parent) {
         super("Administrador de tareas");
         setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         tableModel = new ProcessTableModel();
         table = new JTable(tableModel);
