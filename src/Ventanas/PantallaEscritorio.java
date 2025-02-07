@@ -135,7 +135,7 @@ public class PantallaEscritorio extends Ventana {
         ico4 = createIcon("desktop\\assets\\monitor.png", new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SwingUtilities.invokeLater(() -> openManagedApplication(new TaskManager(PantallaEscritorio.this), "TaskManager"));
+                SwingUtilities.invokeLater(() -> openTaskManager());
             }
         });
         ico5 = createIcon("desktop\\assets\\text.png", new MouseAdapter() {
@@ -391,7 +391,12 @@ public class PantallaEscritorio extends Ventana {
         super.dispose();
     }
 
-    private class ManagedApplication {
+    private void openTaskManager() {
+        TaskManager taskManager = new TaskManager(openApplications);
+        taskManager.setVisible(true);
+    }
+
+    public static class ManagedApplication {
         private JFrame application;
         private String name;
         private long lastCpuTime;
